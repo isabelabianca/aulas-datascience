@@ -36,16 +36,18 @@ end;
 select * from t_conta_corrente;
 
 declare
-    v_dias           number(1):= &v_qt_dias;
+    v_dias           number(2):= &v_qt_dias;
     v_estadia        number(10,2);
     v_convenio       number(1):= &v_convenio;
 begin
-    if (v_dias <= 1) then
+    if (v_dias = 1) then
         v_estadia := v_dias *15;
     elsif(v_dias = 2 or v_dias = 3) then
         v_estadia := v_dias * 10;
-    elsif (v_dias >= 4 or v_dias <=7) then
+    elsif (v_dias >= 4 and v_dias <=7) then
         v_estadia := v_dias * 8;
+    elsif(v_dias > 7) then
+        v_estadia := v_dias * 5;
     end if;
     if (v_convenio = 1) then
         v_estadia := v_estadia * 0.85;
