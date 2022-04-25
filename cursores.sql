@@ -35,3 +35,15 @@ begin
     dbms_output.put_line('Nome: '||v_exibe.nm_fun||' - Salário: '||v_exibe.salario);
     end loop;
 end;
+
+-- Adicionando coluna na tabela
+ALTER TABLE t_funcionario ADD tempo number(10);
+commit;
+
+declare 
+    cursor c_exibe is select * from t_funcionario;
+begin
+    for v_exibe in c_exibe loop
+        update t_funcionario set tempo = sysdate - v_exibe.dt_adm where cd_fun = v_exibe.cd_fun;
+    end loop;
+end;
