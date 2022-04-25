@@ -26,3 +26,12 @@ begin
     end loop;
     close c_exibe;
 end;
+
+-- Mesmo resultado, utilizando o for
+declare 
+    cursor c_exibe is select * from t_funcionario;    
+begin
+    for v_exibe in c_exibe loop
+    dbms_output.put_line('Nome: '||v_exibe.nm_fun||' - Salário: '||v_exibe.salario);
+    end loop;
+end;
