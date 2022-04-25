@@ -47,3 +47,16 @@ begin
         update t_funcionario set tempo = sysdate - v_exibe.dt_adm where cd_fun = v_exibe.cd_fun;
     end loop;
 end;
+
+-- Reajustando salário
+declare 
+    cursor c_exibe is select * from t_funcionario;
+begin
+    for v_exibe in c_exibe loop
+        if (v_exibe.tempo/30 >= 150) then
+            update t_funcionario set salario = v_exibe.salario * 1.1 where cd_fun = v_exibe.cd_fun;
+        else
+            update t_funcionario set salario = v_exibe.salario * 1.05 where cd_fun = v_exibe.cd_fun;
+        end if;
+    end loop;
+end;
